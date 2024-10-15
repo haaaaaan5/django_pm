@@ -13,14 +13,15 @@ class Category(models.Model):
     def __str__(self):
         return self.name
     
+    
 class Project(models.Model):
     title=models.CharField(max_length=255)
-    desciption=models.TextField()
+    description=models.TextField()
     status=models.IntegerField(choices=ProjectsStatus.choices,default=ProjectsStatus.PENDING)
     created_at=models.DateTimeField(auto_now_add=True)
     updated_at=models.DateTimeField(auto_now=True)
-    category=models.ForeignKey(Category,on_delete=models.PROTECT)
-    user= models.ForeignKey(AUTH_USER_MODEL, on_delete=models.CASCADE)
+    category=models.ForeignKey(Category,on_delete=models.PROTECT,null=True )
+    user= models.ForeignKey(AUTH_USER_MODEL, on_delete=models.CASCADE, null=True)
     def __str__(self):
         return self.title
 
